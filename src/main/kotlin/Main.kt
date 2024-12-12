@@ -68,15 +68,22 @@ fun classementMenu(classement: List<Pair<String, Int>>, onStartGame: () -> Unit)
 fun typeRacerGame(onGameEnd: (String, Int) -> Unit, onGameCancel: () -> Unit) {
     val textes = listOf(
         "Aujourd'hui, maman est morte.",
+        "Va, je ne te hais point.",
         "phrase d'exemple avant les phrases finales",
         "encore un exemple",
         "dernier exemple",
-        "auf der heide bluht eine kleines blumelein",
+        "Si seulement on pouvait faire du web en C peut-etre la vie serait cool",
         "En gros luden c'est un item mythique qui donne de la pénétration magique",
         "Pourquoi on fait un projet en Kotlin déjà ?",
         "L'UBO c'est vraiment la meilleur institution du monde",
         "Même si on a un gros déficit c'est pas grave on s'amuse bien",
-        "Ça fait 1 semaine ils disent qu'ils vont nommer un Premier Ministre demain"
+        "Ça fait 1 semaine ils disent qu'ils vont nommer un Premier Ministre demain",
+        "Tout ce que j'aime c'est manger des cartes graphiques et des clés USB",
+        "Liam Frit est un faux alcolique il sort que le jeudi soir",
+        "Mon ex-copine est en surpoids"
+        "Lorem ipsum est un texte qui ressemble à du latin mais en fait ça veut rien dire",
+        "Les vans Volkswagen Transporter 3 souffrent de graves problèmes de corrosion",
+        "Jamel Debbouze a perdu sa main en poussant quelqu'un sous un train"
     )
     var texte by remember { mutableStateOf(textes.random()) }
     var inputUtilisateur by remember { mutableStateOf("") }
