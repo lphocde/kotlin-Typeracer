@@ -32,12 +32,11 @@ fun typeRacerApp() {
     } else {
         typeRacerGame(
             onGameEnd = { nom, mpm ->
-                classement.add(nom to mpm)
+                classement.add(Pair(nom, mpm))
                 afficherMenu = true
             }, onGameCancel = {
                 afficherMenu = true
             }
-
         )
     }
 }
@@ -79,8 +78,23 @@ fun typeRacerGame(onGameEnd: (String, Int) -> Unit, onGameCancel: () -> Unit) {
     var mpm by remember { mutableStateOf(0) }
     var texteComplete by remember { mutableStateOf(false) }
     var nomJoueur by remember { mutableStateOf("") }
+    var pourcentagePrecision by remember { mutableStateOf(0.0) }
 
-    // Compute letter-by-letter accuracy
+    LaunchedEffect(texteComplete) {
+        if (texteComplete) {
+            val totalCharacters = texte.length
+            var charCorrectCount = 0
+
+            inputUtilisateur.forEachIndexed { index, char ->
+                if (index < texte.length && char == texte[index]) {
+                    charCorrectCount++
+                }
+            }
+
+            pourcentagePrecision = (charCorrectCount.toDouble() / totalCharacters * 100).roundToInt().toDouble()
+        }
+    }
+
     val texteAnnote = buildAnnotatedString {
         inputUtilisateur.forEachIndexed { index, char ->
             val charCorrect = texte.getOrNull(index)
@@ -93,7 +107,6 @@ fun typeRacerGame(onGameEnd: (String, Int) -> Unit, onGameCancel: () -> Unit) {
                 if (charCorrect != null){
                     append(charCorrect)
                 }
-
             }
         }
 
@@ -131,6 +144,7 @@ fun typeRacerGame(onGameEnd: (String, Int) -> Unit, onGameCancel: () -> Unit) {
 
             Text("Fin de la partie", style = TextStyle(fontSize = 24.sp, fontWeight = FontWeight.Bold))
             Text("Mots par minute : $mpm", style = TextStyle(fontSize = 20.sp, color = Color.Green))
+            Text("PrÃ©cision : $pourcentagePrecision%", style = TextStyle(fontSize = 20.sp, color = Color.Blue))
             Spacer(modifier = Modifier.height(16.dp))
 
             BasicTextField(
