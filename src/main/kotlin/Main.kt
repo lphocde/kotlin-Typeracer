@@ -7,6 +7,8 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.TextStyle
@@ -125,6 +127,8 @@ fun typeRacerGame(onGameEnd: (String, Int) -> Unit, onGameCancel: () -> Unit) {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         if (texteComplete) {
+            val focusRequester = FocusRequester()
+
             Text("Fin de la partie", style = TextStyle(fontSize = 24.sp, fontWeight = FontWeight.Bold))
             Text("Mots par minute : $mpm", style = TextStyle(fontSize = 20.sp, color = Color.Green))
             Spacer(modifier = Modifier.height(16.dp))
@@ -133,6 +137,7 @@ fun typeRacerGame(onGameEnd: (String, Int) -> Unit, onGameCancel: () -> Unit) {
                 value = nomJoueur,
                 onValueChange = { nomJoueur = it },
                 modifier = Modifier
+                    .focusRequester(focusRequester)
                     .fillMaxWidth()
                     .background(Color.LightGray)
                     .padding(8.dp),
@@ -145,9 +150,13 @@ fun typeRacerGame(onGameEnd: (String, Int) -> Unit, onGameCancel: () -> Unit) {
                 }
             )
 
+            LaunchedEffect(Unit) {
+                focusRequester.requestFocus()
+            }
+
             Spacer(modifier = Modifier.height(16.dp))
             Button(onClick = { onGameEnd(nomJoueur, mpm) }) {
-                Text("Retourner au menu")
+                Text("Sauvegarder et Retourner au menu")
             }
         } else {
             Text(
