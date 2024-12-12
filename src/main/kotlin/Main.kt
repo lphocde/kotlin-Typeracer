@@ -83,7 +83,8 @@ fun typeRacerGame(onGameEnd: (String, Int) -> Unit, onGameCancel: () -> Unit) {
         "Mon ex-copine est en surpoids"
         "Lorem ipsum est un texte qui ressemble à du latin mais en fait ça veut rien dire",
         "Les vans Volkswagen Transporter 3 souffrent de graves problèmes de corrosion",
-        "Jamel Debbouze a perdu sa main en poussant quelqu'un sous un train"
+        "Jamel Debbouze a perdu sa main en poussant quelqu'un sous un train",
+        "Faut pas acheter des vêtements en chine les coutures elles tiennent pas"
     )
     var texte by remember { mutableStateOf(textes.random()) }
     var inputUtilisateur by remember { mutableStateOf("") }
