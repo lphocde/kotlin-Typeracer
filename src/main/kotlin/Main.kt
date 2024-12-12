@@ -70,7 +70,13 @@ fun typeRacerGame(onGameEnd: (String, Int) -> Unit, onGameCancel: () -> Unit) {
         "Aujourd'hui, maman est morte.",
         "phrase d'exemple avant les phrases finales",
         "encore un exemple",
-        "dernier exemple"
+        "dernier exemple",
+        "auf der heide bluht eine kleines blumelein",
+        "En gros luden c'est un item mythique qui donne de la pénétration magique",
+        "Pourquoi on fait un projet en Kotlin déjà ?",
+        "L'UBO c'est vraiment la meilleur institution du monde",
+        "Même si on a un gros déficit c'est pas grave on s'amuse bien",
+        "Ça fait 1 semaine ils disent qu'ils vont nommer un Premier Ministre demain"
     )
     var texte by remember { mutableStateOf(textes.random()) }
     var inputUtilisateur by remember { mutableStateOf("") }
