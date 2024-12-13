@@ -67,24 +67,12 @@ fun classementMenu(classement: List<Pair<String, Int>>, onStartGame: () -> Unit)
 @Composable
 fun typeRacerGame(onGameEnd: (String, Int) -> Unit, onGameCancel: () -> Unit) {
     val textes = listOf(
-        "Aujourd'hui, maman est morte.",
-        "Va, je ne te hais point.",
-        "phrase d'exemple avant les phrases finales",
-        "encore un exemple",
-        "dernier exemple",
-        "Si seulement on pouvait faire du web en C peut-etre la vie serait cool",
-        "En gros luden c'est un item mythique qui donne de la pénétration magique",
-        "Pourquoi on fait un projet en Kotlin déjà ?",
-        "L'UBO c'est vraiment la meilleur institution du monde",
-        "Même si on a un gros déficit c'est pas grave on s'amuse bien",
-        "Ça fait 1 semaine ils disent qu'ils vont nommer un Premier Ministre demain",
-        "Tout ce que j'aime c'est manger des cartes graphiques et des clés USB",
-        "Liam Frit est un faux alcolique il sort que le jeudi soir",
-        "Mon ex-copine est en surpoids"
-        "Lorem ipsum est un texte qui ressemble à du latin mais en fait ça veut rien dire",
-        "Les vans Volkswagen Transporter 3 souffrent de graves problèmes de corrosion",
-        "Jamel Debbouze a perdu sa main en poussant quelqu'un sous un train",
-        "Faut pas acheter des vêtements en chine les coutures elles tiennent pas"
+        "Aujourd’hui, maman est morte. Ou peut-être hier, je ne sais pas.",
+        "Contre-Attaque : Jax entre dans une position défensive pendant 2 secondes maximum, évitant les attaques entrantes",
+        "Kotlin est un langage de programmation orienté objet et fonctionnel, avec un typage statique qui permet de compiler pour la machine virtuelle Java.",
+        "L'université de Bretagne-Occidentale est une université française pluridisciplinaire située dans le département du Finistère et la région Bretagne",
+        "Au casino on peut seulement perdre 100% mais on peut gagner plus de 1000%, c'est donc statistiquement rentable de mettre tout son salaire sur le zéro",
+        "Lorem ipsum est un texte qui ressemble à du latin mais en fait ça ne veut rien dire"
     )
     var texte by remember { mutableStateOf(textes.random()) }
     var inputUtilisateur by remember { mutableStateOf("") }
