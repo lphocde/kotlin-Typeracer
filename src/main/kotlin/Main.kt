@@ -146,7 +146,7 @@ fun typeRacerGame(onGameEnd: (String, Int) -> Unit, onGameCancel: () -> Unit) {
 
             Text("Fin de la partie", style = TextStyle(fontSize = 24.sp, fontWeight = FontWeight.Bold))
             Text("Mots par minute : $mpm", style = TextStyle(fontSize = 20.sp, color = Color.Green))
-            Text("PrÃ©cision : $pourcentagePrecision%", style = TextStyle(fontSize = 20.sp, color = Color.Blue))
+            Text("Précision : $pourcentagePrecision%", style = TextStyle(fontSize = 20.sp, color = Color.Blue))
             Spacer(modifier = Modifier.height(16.dp))
 
             BasicTextField(
