@@ -68,7 +68,6 @@ fun classementMenu(classement: List<Pair<String, Int>>, onStartGame: () -> Unit)
 fun typeRacerGame(onGameEnd: (String, Int) -> Unit, onGameCancel: () -> Unit) {
     val textes = listOf(
         "Aujourd’hui, maman est morte. Ou peut-être hier, je ne sais pas.",
-        "Contre-Attaque : Jax entre dans une position défensive pendant 2 secondes maximum, évitant les attaques entrantes",
         "Kotlin est un langage de programmation orienté objet et fonctionnel, avec un typage statique qui permet de compiler pour la machine virtuelle Java.",
         "L'université de Bretagne-Occidentale est une université française pluridisciplinaire située dans le département du Finistère et la région Bretagne",
         "Au casino on peut seulement perdre 100% mais on peut gagner plus de 1000%, c'est donc statistiquement rentable de mettre tout son salaire sur le zéro",
@@ -112,7 +111,6 @@ fun typeRacerGame(onGameEnd: (String, Int) -> Unit, onGameCancel: () -> Unit) {
             }
         }
 
-        // Append any remaining target text in black
         if (inputUtilisateur.length < texte.length) {
             append(texte.substring(inputUtilisateur.length))
         }
@@ -127,7 +125,6 @@ fun typeRacerGame(onGameEnd: (String, Int) -> Unit, onGameCancel: () -> Unit) {
             val compteurMots = inputUtilisateur.trim().split(" ").size
             mpm = if (tempsEcoule > 0) (compteurMots / (tempsEcoule / 60)).roundToInt() else 0
 
-            // End game when user reaches full text length
             if (inputUtilisateur.length >= texte.length) {
                 texteComplete = true
             }
