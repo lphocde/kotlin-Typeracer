@@ -28,8 +28,10 @@ fun typeRacerApp() {
     val classement = remember { mutableStateListOf<Pair<String, Int>>() }
 
     if (afficherMenu) {
+        //onStartGame pas passé en paramètre car pas utilisé
         classementMenu(classement) { afficherMenu = false }
     } else {
+        //lance le jeu
         typeRacerGame(
             onGameEnd = { nom, mpm ->
                 classement.add(Pair(nom, mpm))
@@ -73,7 +75,8 @@ fun typeRacerGame(onGameEnd: (String, Int) -> Unit, onGameCancel: () -> Unit) {
         "Au casino on peut seulement perdre 100% mais on peut gagner plus de 1000%, c'est donc statistiquement rentable de mettre tout son salaire sur le zéro",
         "Lorem ipsum est un texte qui ressemble à du latin mais en fait ça ne veut rien dire"
     )
-    var texte by remember { mutableStateOf(textes.random()) }
+    val texte by remember { mutableStateOf(textes.random()) }
+
     var inputUtilisateur by remember { mutableStateOf("") }
     var heureDebut by remember { mutableStateOf<Long?>(null) }
     var mpm by remember { mutableStateOf(0) }
@@ -81,6 +84,7 @@ fun typeRacerGame(onGameEnd: (String, Int) -> Unit, onGameCancel: () -> Unit) {
     var nomJoueur by remember { mutableStateOf("") }
     var pourcentagePrecision by remember { mutableStateOf(0.0) }
 
+    //calcul du %age de précision une fois le texte complété
     LaunchedEffect(texteComplete) {
         if (texteComplete) {
             val totalCharacters = texte.length
@@ -95,7 +99,7 @@ fun typeRacerGame(onGameEnd: (String, Int) -> Unit, onGameCancel: () -> Unit) {
             pourcentagePrecision = (charCorrectCount.toDouble() / totalCharacters * 100).roundToInt().toDouble()
         }
     }
-
+    //colore le texte en vert/rouge s'il est bon/mauvais
     val texteAnnote = buildAnnotatedString {
         inputUtilisateur.forEachIndexed { index, char ->
             val charCorrect = texte.getOrNull(index)
@@ -110,12 +114,12 @@ fun typeRacerGame(onGameEnd: (String, Int) -> Unit, onGameCancel: () -> Unit) {
                 }
             }
         }
-
+        //fallback en cas de bug, si le jeu ne s'arrête pas à la fin du texte et qu'on tape trop de texte, les derniers caractères sont supprimés
         if (inputUtilisateur.length < texte.length) {
             append(texte.substring(inputUtilisateur.length))
         }
     }
-
+    //a chaque input, update le compteur de mpm et vérifie si le jeu est terminé
     LaunchedEffect(inputUtilisateur) {
         if (inputUtilisateur.isNotEmpty() && !texteComplete) {
             if (heureDebut == null) {
@@ -131,6 +135,7 @@ fun typeRacerGame(onGameEnd: (String, Int) -> Unit, onGameCancel: () -> Unit) {
         }
     }
 
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -138,6 +143,7 @@ fun typeRacerGame(onGameEnd: (String, Int) -> Unit, onGameCancel: () -> Unit) {
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
+        //si la partie est terminée -> affichage de l'écran de fin
         if (texteComplete) {
             val focusRequester = FocusRequester()
 
@@ -162,7 +168,7 @@ fun typeRacerGame(onGameEnd: (String, Int) -> Unit, onGameCancel: () -> Unit) {
                     innerTextField()
                 }
             )
-
+            //focus le curseur sur la textbox sans avoir à cliquer dessus
             LaunchedEffect(Unit) {
                 focusRequester.requestFocus()
             }
